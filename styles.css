@@ -1,0 +1,125 @@
+:root {
+  color-scheme: light;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #172033;
+  background: #f3f6fa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.app-shell {
+  width: min(100% - 32px, 720px);
+  margin: 0 auto;
+  padding: 64px 0;
+}
+
+.page-header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #2563eb;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 2.7rem);
+}
+
+.description {
+  margin: 12px 0 0;
+  color: #64748b;
+}
+
+.search-panel {
+  padding: 22px;
+  border: 1px solid #dce3ed;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgb(15 23 42 / 6%);
+}
+
+.search-panel label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.search-panel input {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.search-panel input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 14%);
+}
+
+.status {
+  min-height: 1.25em;
+  margin: 12px 0 0;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.results {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.product {
+  padding: 20px 22px;
+  border: 1px solid #dce3ed;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.product h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.price {
+  margin: 10px 0;
+  color: #1d4ed8;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.identifiers {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  .app-shell {
+    padding-top: 40px;
+  }
+
+  .search-panel,
+  .product {
+    padding: 18px;
+  }
+}

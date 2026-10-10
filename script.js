@@ -3,6 +3,7 @@ const produtosContainer = document.querySelector('#produtos');
 const statusElement = document.querySelector('#status');
 
 let produtos = [];
+const pageSize = 1000;
 
 const formatCurrency = (value) =>
   new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
@@ -64,20 +65,47 @@ buscaInput.addEventListener('input', () => {
 
 const loadProducts = async () => {
   try {
-    const response = await fetch('./produtos.json');
-    if (!response.ok) {
-      throw new Error(`Falha ao carregar produtos (HTTP ${response.status}).`);
+    const config = window.SUPABASE_CONFIG;
+    if (!config?.url || !config?.publishableKey) {
+      throw new Error('A configuração do Supabase está incompleta.');
     }
 
-    const data = await response.json();
-    if (!Array.isArray(data)) {
-      throw new Error('O arquivo de produtos precisa conter uma lista JSON.');
+    const endpoint = new URL(`${config.url.replace(/\/+$/, '')}/rest/v1/produtos`);
+    endpoint.searchParams.set('select', 'id,"Nome",codigo,codigo_barras,preco');
+    endpoint.searchParams.set('order', 'codigo.asc,id.asc');
+    endpoint.searchParams.set('limit', String(pageSize));
+
+    for (let offset = 0; ; offset += pageSize) {
+      endpoint.searchParams.set('offset', String(offset));
+      const response = await fetch(endpoint, {
+        headers: { apikey: config.publishableKey },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Falha ao carregar produtos do Supabase (HTTP ${response.status}).`);
+      }
+
+      const data = await response.json();
+      if (!Array.isArray(data)) {
+        throw new Error('A resposta do Supabase não contém uma lista de produtos.');
+      }
+
+      produtos.push(
+        ...data.map((produto) => ({
+          nome: produto.Nome,
+          codigo: produto.codigo,
+          barcode: produto.codigo_barras,
+          preco: produto.preco,
+        }))
+      );
+      if (data.length < pageSize) {
+        break;
+      }
     }
 
-    produtos = data;
     statusElement.textContent = `${produtos.length} produtos cadastrados. Digite para consultar um preço.`;
   } catch (error) {
-    statusElement.textContent = 'Não foi possível carregar a lista de produtos.';
+    statusElement.textContent = `Não foi possível carregar os produtos: ${error.message}`;
     console.error('Erro ao carregar produtos:', error);
   }
 };

@@ -1,6 +1,13 @@
 # Consulta de preços
 
-Aplicativo estático para consultar os produtos cadastrados em `produtos.json` por nome, código ou código de barras.
+Aplicativo estático para consultar produtos armazenados no Supabase por nome, código ou código de barras.
+
+## Configurar o Supabase
+
+1. No painel do projeto, abra **SQL Editor**, cole o conteúdo de [`supabase.sql`](./supabase.sql) e execute. O script usa a tabela existente `public.produtos` (`id`, `"Nome"`, `codigo`, `codigo_barras`, `preco`) e carrega o catálogo inicial. Produtos com código correspondente são atualizados; os que ainda não existem são inseridos. O script não altera políticas, permissões nem apaga linhas.
+2. Publique o site. A configuração do projeto e a chave publishable ficam em [`supabase-config.js`](./supabase-config.js).
+
+A chave `sb_publishable_` é própria para uso no navegador. Não coloque chaves `secret` ou `service_role` nesse arquivo. Cadastros e alterações devem ser feitos no painel do Supabase.
 
 ## Publicar no GitHub Pages
 
@@ -12,15 +19,16 @@ O endereço do site será exibido na execução concluída do workflow e nas con
 
 ## Atualizar produtos
 
-Edite `produtos.json` e envie a alteração para o GitHub. Cada produto usa este formato:
+Após a carga inicial pelo SQL, gerencie os produtos em **Table Editor > produtos** no Supabase. Cada linha usa estes campos:
 
 ```json
 {
+  "id": 1,
+  "Nome": "Nome do produto",
   "codigo": "001245",
-  "nome": "Nome do produto",
-  "barcode": "7891234567890",
+  "codigo_barras": "7891234567890",
   "preco": 25.90
 }
 ```
 
-O campo `barcode` pode ser uma string vazia quando o produto não tiver código de barras na tabela. Como o site e esse arquivo serão públicos, os preços cadastrados ficarão visíveis para qualquer pessoa com acesso ao endereço.
+O campo `codigo_barras` pode ficar vazio quando o produto não tiver código de barras. Como o site permite leitura pública, os preços cadastrados ficarão visíveis para qualquer pessoa com acesso ao endereço.

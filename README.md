@@ -9,6 +9,15 @@ Aplicativo estático para consultar produtos armazenados no Supabase por nome, c
 
 A chave `sb_publishable_` é própria para uso no navegador. Não coloque chaves `secret` ou `service_role` nesse arquivo. As alterações feitas pelo site são autorizadas pelas políticas RLS do Supabase.
 
+## Instalar no Chrome
+
+O site pode ser instalado como aplicativo no computador ou no celular pelo Chrome. Abra o endereço publicado usando HTTPS e:
+
+- Se aparecer **Instalar aplicativo** no rodapé, clique no botão e confirme.
+- Caso o botão não apareça, abra o menu **⋮** do Chrome e selecione **Instalar Consulta de Preços** (ou **Instalar página como app**).
+
+O navegador também oferece a instalação pelo ícone de instalação na barra de endereço, quando disponível. A consulta e o painel administrativo podem abrir em janelas próprias. Os arquivos do app são armazenados para permitir a abertura offline; consultar ou alterar preços continua dependendo da conexão com o Supabase.
+
 ## Configurar o painel administrativo
 
 O link **Acessar painel administrativo** no rodapé abre [`admin.html`](./admin.html). O painel permite cadastrar, editar, pesquisar e excluir produtos usando uma conta de administrador do Supabase.

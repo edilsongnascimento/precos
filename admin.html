@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Administração de produtos</title>
+    <meta name="theme-color" content="#315bd6" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -105,9 +109,14 @@
 
     <footer class="site-footer">
       <a href="./index.html">Voltar à consulta de preços</a>
+      <button id="install-app" class="install-button" type="button" hidden>Instalar aplicativo</button>
+      <p id="install-status" class="install-status" aria-live="polite">
+        No Chrome, use o menu ⋮ e escolha “Instalar Consulta de Preços”.
+      </p>
     </footer>
 
     <script src="supabase-config.js"></script>
+    <script src="pwa.js"></script>
     <script src="admin.js"></script>
   </body>
 </html>

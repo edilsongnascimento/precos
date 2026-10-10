@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consulta de Preços</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="page-header">
+        <p class="eyebrow">Consulta rápida</p>
+        <h1>Encontre seu produto</h1>
+        <p class="description">Consulte preços pelo nome, código ou código de barras.</p>
+      </header>
+
+      <section class="search-panel" aria-label="Pesquisar produtos">
+        <label for="busca">O que você está procurando?</label>
+        <div class="search-row">
+          <input
+            id="busca"
+            type="search"
+            placeholder="Ex.: ração cachorro adulto"
+            autocomplete="off"
+            autofocus
+          />
+          <button
+            id="abrir-camera"
+            class="camera-button"
+            type="button"
+            aria-label="Ler código de barras com a câmera"
+            title="Ler código de barras com a câmera"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="M4 7.5h3l1.5-2h7l1.5 2h3A1.5 1.5 0 0 1 21.5 9v9a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V9A1.5 1.5 0 0 1 4 7.5Z" />
+              <circle cx="12" cy="13" r="3.5" />
+            </svg>
+          </button>
+        </div>
+        <p class="search-hint">Você pode digitar várias palavras, em qualquer ordem.</p>
+        <p id="status" class="status" aria-live="polite">Carregando produtos...</p>
+      </section>
+
+      <section id="produtos" class="results" aria-live="polite" aria-label="Resultados da pesquisa"></section>
+    </main>
+
+    <footer class="site-footer">
+      <a href="./admin.html">Acessar painel administrativo</a>
+    </footer>
+
+    <dialog id="leitor-camera" class="scanner-dialog" aria-labelledby="titulo-leitor">
+      <div class="scanner-header">
+        <div>
+          <p class="eyebrow">Consulta rápida</p>
+          <h2 id="titulo-leitor">Ler código de barras</h2>
+        </div>
+        <button id="fechar-camera" class="close-button" type="button" aria-label="Fechar câmera">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+            <path d="m6 6 12 12M18 6 6 18" />
+          </svg>
+        </button>
+      </div>
+      <div class="video-frame">
+        <video id="video-camera" autoplay muted playsinline></video>
+        <span class="scan-guide" aria-hidden="true"></span>
+      </div>
+      <p id="status-camera" class="scanner-status" aria-live="polite">
+        Posicione o código de barras dentro da moldura.
+      </p>
+    </dialog>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@zxing/browser@0.2.1/umd/zxing-browser.min.js"
+      integrity="sha384-HRtzk9lZgkbSgvUyQrnfC/GxiXZgwaNyD7hC9wcXlsBpDhkS80ISl73juef2FRuf"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="supabase-config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

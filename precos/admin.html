@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Administração de produtos</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <header class="page-header">
+        <p class="eyebrow">Área restrita</p>
+        <h1>Administração de produtos</h1>
+        <p class="description">Entre para cadastrar, editar ou remover produtos.</p>
+      </header>
+
+      <section id="login-panel" class="admin-panel" aria-labelledby="login-title">
+        <h2 id="login-title">Entrar</h2>
+        <form id="login-form" class="admin-form">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" autocomplete="username" required />
+          <label for="password">Senha</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+          <button class="admin-button" type="submit">Entrar</button>
+        </form>
+        <p id="login-status" class="admin-status" aria-live="polite"></p>
+      </section>
+
+      <section id="admin-panel" class="admin-panel" aria-labelledby="products-title" hidden>
+        <div class="admin-toolbar">
+          <div>
+            <h2 id="products-title">Produtos</h2>
+            <p id="signed-in-as" class="admin-muted"></p>
+          </div>
+          <button id="logout-button" class="admin-button admin-button-secondary" type="button">Sair</button>
+        </div>
+
+        <form id="product-form" class="admin-form product-form">
+          <h3 id="product-form-title">Cadastrar produto</h3>
+          <input id="product-id" name="id" type="hidden" />
+          <label for="product-name">Nome</label>
+          <input id="product-name" name="nome" maxlength="500" required />
+          <div class="admin-fields-row">
+            <div>
+              <label for="product-code">Código</label>
+              <input id="product-code" name="codigo" maxlength="100" required />
+            </div>
+            <div>
+              <label for="product-barcode">Código de barras</label>
+              <input id="product-barcode" name="codigo_barras" maxlength="100" />
+            </div>
+            <div>
+              <label for="product-price">Preço (R$)</label>
+              <input id="product-price" name="preco" type="number" min="0" step="0.01" required />
+            </div>
+          </div>
+          <div class="admin-actions">
+            <button id="save-product-button" class="admin-button" type="submit">Cadastrar produto</button>
+            <button id="cancel-edit-button" class="admin-button admin-button-secondary" type="button" hidden>
+              Cancelar edição
+            </button>
+          </div>
+          <p id="product-status" class="admin-status" aria-live="polite"></p>
+        </form>
+
+        <section class="admin-list" aria-labelledby="list-title">
+          <h3 id="list-title">Produtos cadastrados</h3>
+          <form id="search-form" class="admin-search">
+            <label class="visually-hidden" for="product-search">Buscar por nome ou código</label>
+            <input
+              id="product-search"
+              type="search"
+              placeholder="Buscar por nome ou código"
+              autocomplete="off"
+            />
+            <button class="admin-button admin-button-secondary" type="submit">Buscar</button>
+          </form>
+          <p id="list-status" class="admin-status" aria-live="polite">Carregando produtos...</p>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th scope="col">Produto</th>
+                  <th scope="col">Código</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="product-rows"></tbody>
+            </table>
+          </div>
+          <nav class="admin-pagination" aria-label="Paginação de produtos">
+            <button id="previous-page" class="admin-button admin-button-secondary" type="button" disabled>
+              Anterior
+            </button>
+            <span id="page-status" class="admin-muted"></span>
+            <button id="next-page" class="admin-button admin-button-secondary" type="button" disabled>
+              Próxima
+            </button>
+          </nav>
+        </section>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a href="./index.html">Voltar à consulta de preços</a>
+    </footer>
+
+    <script src="supabase-config.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
